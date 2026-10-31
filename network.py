@@ -1,7 +1,7 @@
 import re
 import subprocess
 
-def ping_host(host):
+def ping_host(host: str):
     # SECURITY FIX: stop command injection (CVE-DEMO-0003)
     if not re.fullmatch(r"[A-Za-z0-9.-]+", host):
         raise ValueError("Invalid host")
