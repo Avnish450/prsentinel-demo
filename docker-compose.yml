@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  prsentinel:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: prsentinel-dashboard
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:////app/data/prsentinel.db
+      - ADMIN_PASSWORD=prsentinel-admin
+      - ADMIN_TOKEN=prsentinel-secret-token
+      - ENCRYPTION_SECRET=8v1Xp7F2rM3kL9jW4qZ0tY5uI6oP8aB1cE2dF3gH4jK=
+      - MAX_CLONE_TIMEOUT_SEC=120
+      - MAX_REPO_SIZE_MB=250
+      - MAX_CONCURRENT_JOBS=2
+    volumes:
+      - prsentinel_data:/app/data
+    healthcheck:
+      test: ["CMD", "python3", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+
+volumes:
+  prsentinel_data:
+

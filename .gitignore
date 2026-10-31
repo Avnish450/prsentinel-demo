@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+*.db
+*.sqlite3
+
+# Node & Frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.npm
+dist/
+
+# Testing & Cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Logs & OS
+*.log
+.DS_Store
+
