@@ -8,5 +8,47 @@
       "if \"..\" in filename or filename.startswith(\"/\"):",
       "raise ValueError(\"Invalid file path\")"
     ]
+  },
+  {
+    "id": "CVE-DEMO-0002",
+    "description": "SQL injection in get_user",
+    "file": "db.py",
+    "source": "demo",
+    "fix_added_lines": [
+      "if not re.fullmatch(r\"[A-Za-z0-9_]+\", username):",
+      "raise ValueError(\"Invalid username\")",
+      "cursor.execute(\"SELECT * FROM users WHERE name = ?\", (username,))"
+    ]
+  },
+  {
+    "id": "CVE-DEMO-0003",
+    "description": "Command injection in ping_host",
+    "file": "network.py",
+    "source": "demo",
+    "fix_added_lines": [
+      "if not re.fullmatch(r\"[A-Za-z0-9.-]+\", host):",
+      "raise ValueError(\"Invalid host\")",
+      "return subprocess.run([\"ping\", \"-c\", \"1\", host], capture_output=True)"
+    ]
+  },
+  {
+    "id": "CVE-DEMO-0004",
+    "description": "Missing admin permission check in delete_user",
+    "file": "admin.py",
+    "source": "demo",
+    "fix_added_lines": [
+      "if not current_user.is_admin:",
+      "raise PermissionError(\"Admin access required\")"
+    ]
+  },
+  {
+    "id": "CVE-DEMO-0005",
+    "description": "Missing webhook signature verification",
+    "file": "webhook.py",
+    "source": "demo",
+    "fix_added_lines": [
+      "if not hmac.compare_digest(signature, expected):",
+      "raise PermissionError(\"Bad signature\")"
+    ]
   }
 ]
