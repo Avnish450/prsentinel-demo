@@ -1,0 +1,12 @@
+[
+  {
+    "id": "CVE-DEMO-0001",
+    "description": "Path traversal in read_user_file",
+    "file": "app.py",
+    "source": "demo",
+    "fix_added_lines": [
+      "if \"..\" in filename or filename.startswith(\"/\"):",
+      "raise ValueError(\"Invalid file path\")"
+    ]
+  }
+]
